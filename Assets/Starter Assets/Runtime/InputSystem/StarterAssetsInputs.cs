@@ -19,7 +19,14 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+		
+		Abilities abilities;
 
+		void Start()
+		{
+			abilities = GetComponent<Abilities>();
+		}
+		
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
@@ -42,6 +49,14 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}
+
+		public void OnAttack(InputValue value)
+		{
+			if (abilities != null)
+			{
+				abilities.Attack();
+			}
 		}
 #endif
 
