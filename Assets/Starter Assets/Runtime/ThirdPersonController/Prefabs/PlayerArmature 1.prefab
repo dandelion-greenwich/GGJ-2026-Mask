@@ -1037,8 +1037,8 @@ GameObject:
   - component: {fileID: 135756642000475821}
   - component: {fileID: 4416926081852918493}
   m_Layer: 8
-  m_Name: PlayerArmature
-  m_TagString: Player 1
+  m_Name: PlayerArmature 1
+  m_TagString: Player 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2237,7 +2237,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43714b68324cc2c409d534d9874f2a2b, type: 2}
+  - {fileID: 2100000, guid: 1c25ed43c237c9a49ae7e846f600dd25, type: 2}
   - {fileID: 2100000, guid: 766fd3ff04aab4745a764d33daac86fa, type: 2}
   - {fileID: 2100000, guid: 8b25e99361ac31d4e9ae83c46aee69ea, type: 2}
   m_StaticBatchInfo:
