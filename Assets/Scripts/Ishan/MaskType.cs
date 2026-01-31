@@ -1,4 +1,5 @@
 using UnityEngine;
+using StarterAssets;
 
 public enum MaskType
 {
@@ -11,39 +12,62 @@ public class MaskTypeScript : MonoBehaviour
 {
     public MaskType type;
 
-    public void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player1")
-        {
-            EquipMask(collider);
-        }
-
-        if (collider.tag == "Player2")
+        if (collider.CompareTag("Player 1") || collider.CompareTag("Player 2"))
         {
             EquipMask(collider);
         }
     }
 
-
-
-    public void EquipMask(Collider col)
+    private void EquipMask(Collider col)
     {
         if (type == MaskType.Stone)
         {
-            Debug.Log("Stone Mask Equipped");
-           // what does this type do
+            Debug.Log("Stone Mask Equipped By: " + col.tag);
+            EquipStone(col);
         }
         else if (type == MaskType.Wing)
         {
-            Debug.Log("Wing Mask Equipped");
-            // what does this type do
+            Debug.Log("Wing Mask Equipped By: " + col.tag);
+            EquipWing(col);
         }
         else if (type == MaskType.Saitama)
         {
-            Debug.Log("Saitama Mask Equipped");
-            // what does this type do
+            Debug.Log("Saitama Mask Equipped By: " + col.tag);
+            EquipSaitama(col);
         }
 
         Destroy(gameObject);
+    }
+
+    private void EquipStone(Collider col)
+    {
+        ThirdPersonController tpc = col.GetComponent<ThirdPersonController>();
+        tpc.MoveSpeed = 1.0f;
+        tpc.JumpHeight = 0.6f;
+
+        Rigidbody rb = col.GetComponent<Rigidbody>();
+        rb.mass = 10f;
+    }
+
+    private void EquipWing(Collider col)
+    {
+        ThirdPersonController tpc = col.GetComponent<ThirdPersonController>();
+        tpc.MoveSpeed = 4.0f;
+        tpc.JumpHeight = 3.2f;
+
+        Rigidbody rb = col.GetComponent<Rigidbody>();
+        rb.mass = 0.5f;
+    }
+
+    private void EquipSaitama(Collider col)
+    {
+        ThirdPersonController tpc = col.GetComponent<ThirdPersonController>();
+        tpc.MoveSpeed = 2.0f;
+        tpc.JumpHeight = 2f;
+
+        Rigidbody rb = col.GetComponent<Rigidbody>();
+        rb.mass = 2f;
     }
 }
