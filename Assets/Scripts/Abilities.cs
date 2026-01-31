@@ -6,17 +6,15 @@ public class Abilities : MonoBehaviour
     [Header("Attack")] 
     [SerializeField] private float radius = 0.5f;
     [SerializeField] private float maxDistance = 1f;
+
+    [Header("Lives")] 
+    public int lives;
+    public int maxLives;
     
     
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        lives = maxLives;
     }
 
     public void Attack()
@@ -29,6 +27,22 @@ public class Abilities : MonoBehaviour
         if (Physics.SphereCast(origin, radius, direction, out RaycastHit hit, maxDistance))
         {
             Debug.Log("Hit: " + hit.collider.name);
+            if (!hit.collider.CompareTag("Player 1") 
+                && !hit.collider.CompareTag("Player 2"))
+            return;
+            
+            Abilities ab = hit.collider.gameObject.GetComponent<Abilities>();
+            if (ab != null) ab.TakeDamage();
+        }
+    }
+
+    private void TakeDamage()
+    {
+        lives--;
+
+        if (lives <= 0)
+        {
+        Manager.Instance.EndGame();
         }
     }
     
