@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon 1
+  m_Name: Toon 3
   m_Shader: {fileID: 4800000, guid: 5b7d18bf8a091cc48a3a9075eca72ff9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -52,8 +52,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -149,7 +150,7 @@ Material:
     - _CastShadowsNoise1Size: 1
     - _CastShadowsNoise2Seed: 1
     - _CastShadowsNoiseIntensity: 0
-    - _CastShadowsNumberOfCellsHatching: 1
+    - _CastShadowsNumberOfCellsHatching: 2
     - _CastShadowsOpacityRandomIntensity: 0
     - _CastShadowsOpacityRandomMode: 0
     - _CastShadowsPolarCenterMode: 0
@@ -216,7 +217,7 @@ Material:
     - _OpacityRandomMode: 0
     - _OutlineConstantScreenWidth: 0
     - _OutlineDepthOffset: 0
-    - _OutlineWidth: 22
+    - _OutlineWidth: 25
     - _Parallax: 0.005
     - _PolarCenterMode: 0
     - _QueueControl: -1
@@ -313,9 +314,9 @@ Material:
     - _StylingCastShadowsRotationBetweenCells: 30
     - _StylingCastShadowsSmoothness: 1
     - _StylingCastShadowsSyncWithOtherStyling: 1
-    - _StylingCastShadowsThickness: 0.8
+    - _StylingCastShadowsThickness: 0.9
     - _StylingCastShadowsThicknessControl: 0
-    - _StylingCastShadowsThicknessFalloff: 0.1
+    - _StylingCastShadowsThicknessFalloff: 0.5
     - _StylingDFFalloff: 0
     - _StylingDFStartingDistance: 0
     - _StylingDistanceFadeValue: 0
@@ -387,7 +388,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.44635582, g: 0.4058454, b: 0.4490565, a: 1}
+    - _BaseColor: {r: 0.07913844, g: 0.4415095, b: 0.13404319, a: 1}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
