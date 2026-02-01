@@ -14,9 +14,12 @@ public class Abilities : MonoBehaviour
     public float forceStrengthZ;
     public float forceStrengthY;
 
-    public enum MaskTypeEquipped {Stone, Wing, Saitama}
+    public enum MaskTypeEquipped {None, Stone, Wing, Saitama}
     public MaskTypeEquipped equippedMask;
     
+    public GameObject StoneMesh;
+    public GameObject WingMesh;
+    public GameObject SaitamaMesh;
     
     void Start()
     {
@@ -152,5 +155,27 @@ public class Abilities : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(origin, radius);
 #endif
+    }
+
+    void Update()
+    {
+        if (equippedMask == MaskTypeEquipped.Stone)
+        {
+            SaitamaMesh.SetActive(false);
+            WingMesh.SetActive(false);
+            StoneMesh.SetActive(true);
+        }
+        else if (equippedMask == MaskTypeEquipped.Wing)
+        {
+            SaitamaMesh.SetActive(false);
+            WingMesh.SetActive(true);
+            StoneMesh.SetActive(false);
+        }
+        else if (equippedMask == MaskTypeEquipped.Saitama)
+        {
+            SaitamaMesh.SetActive(true);
+            WingMesh.SetActive(false);
+            StoneMesh.SetActive(false);
+        }
     }
 }
