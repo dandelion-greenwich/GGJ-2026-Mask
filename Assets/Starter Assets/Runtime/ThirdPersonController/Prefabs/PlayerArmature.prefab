@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8002264680419333305}
-  - component: {fileID: 5691977545447910366}
-  - component: {fileID: 2340044527132953410}
+  - component: {fileID: 5811973665379300358}
+  - component: {fileID: 2340508720711092970}
   m_Layer: 0
   m_Name: Geometry
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3893294197879345259}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
---- !u!23 &5691977545447910366
+--- !u!23 &5811973665379300358
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -8209036603341754336, guid: 85d11b4d4af576845a01cf1741f7f073, type: 3}
-  - {fileID: -1580535799172915004, guid: 85d11b4d4af576845a01cf1741f7f073, type: 3}
+  - {fileID: 3500735800982149088, guid: aa3f50cef2902e54eb18314be86aadfd, type: 3}
   - {fileID: -8848810374240701247, guid: 85d11b4d4af576845a01cf1741f7f073, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2340044527132953410
+--- !u!33 &2340508720711092970
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,6 +236,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.5
   maxDistance: 1
+  lives: 0
+  maxLives: 0
 --- !u!114 &4416926081852918493
 MonoBehaviour:
   m_ObjectHideFlags: 0
