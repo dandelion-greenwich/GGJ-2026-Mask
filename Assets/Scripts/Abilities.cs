@@ -112,14 +112,13 @@ public class Abilities : MonoBehaviour
     public void TakeDamage()
     {
         lives--;
-
+        Manager.Instance.Respawn(gameObject);
+        
         if (lives <= 0)
         {
         Manager.Instance.EndGame();
         }
     }
-    
-    
     
     // Debug for attack function
     void OnDrawGizmos()

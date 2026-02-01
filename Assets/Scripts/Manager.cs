@@ -25,7 +25,7 @@ public class Manager : MonoBehaviour
     
     public enum GameState{Start, Playing, GameOver};
     GameState gameState;
-    Abilities player1, player2;
+    public GameObject player1, player2;
     GameObject currentMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
@@ -45,8 +45,8 @@ public class Manager : MonoBehaviour
         Instantiate(playerPrefab1, playerSpawn1.position, playerSpawn1.rotation);
         Instantiate(playerPrefab2, playerSpawn2.position, playerSpawn2.rotation);
 
-        player1 = GameObject.FindGameObjectWithTag("Player 1").GetComponent<Abilities>();
-        player2 = GameObject.FindGameObjectWithTag("Player 2").GetComponent<Abilities>();
+        player1 = GameObject.FindGameObjectWithTag("Player 1");
+        player2 = GameObject.FindGameObjectWithTag("Player 2");
         
         gameState = GameState.Start;
         UpdateUI();
@@ -85,6 +85,32 @@ public class Manager : MonoBehaviour
         
         currentMask = Instantiate(maskPrefab, maskSpawn.position, maskSpawn.rotation);
         StartCoroutine(LiveDurationCoroutine(timeToBreakMask));
+    }
+
+    public void Respawn(GameObject player)
+    {
+        if (player.CompareTag("Player 1"))
+        {
+            Debug.Log("Respawning player 1");
+            CharacterController CC = player.GetComponent<CharacterController>();
+            if (CC != null)
+            {
+                CC.enabled = false;
+                player1.transform.position = playerSpawn1.position;
+                CC.enabled = true;
+            }
+        }
+        else
+        {
+            Debug.Log("Respawning player 2");
+            CharacterController CC = player.GetComponent<CharacterController>();
+            if (CC != null)
+            {
+                CC.enabled = false;
+                player2.transform.position = playerSpawn2.position;
+                CC.enabled = true;
+            }
+        }
     }
     
     public IEnumerator SpawnMaskCoroutine(float waitTime)
