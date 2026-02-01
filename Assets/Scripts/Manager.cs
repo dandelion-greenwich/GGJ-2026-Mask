@@ -25,7 +25,7 @@ public class Manager : MonoBehaviour
     
     public enum GameState{Start, Playing, GameOver};
     GameState gameState;
-    public GameObject player1, player2;
+    GameObject player1, player2;
     GameObject currentMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
@@ -121,7 +121,8 @@ public class Manager : MonoBehaviour
     }
     public IEnumerator LiveDurationCoroutine(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(30f);
+        if (currentMask != null) Destroy(currentMask);
         
         StartCoroutine(SpawnMaskCoroutine(waitTime));
     }
