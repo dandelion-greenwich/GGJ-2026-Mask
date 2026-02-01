@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using StarterAssets;
+using Random = Unity.Mathematics.Random;
 
 public enum MaskType
 {
@@ -17,6 +19,23 @@ public class MaskTypeScript : MonoBehaviour
         if (collider.CompareTag("Player 1") || collider.CompareTag("Player 2"))
         {
             EquipMask(collider);
+        }
+    }
+
+    private void Start()
+    {
+        int rand = UnityEngine.Random.Range(0, 2);
+        switch (rand)
+        {
+            case 1:
+                type = MaskType.Stone;
+                break;
+            case 2:
+                type = MaskType.Wing;
+                break;
+            case 3:
+                type = MaskType.Saitama;
+                break;
         }
     }
 

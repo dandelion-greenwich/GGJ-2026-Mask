@@ -39,8 +39,8 @@ public class Abilities : MonoBehaviour
             
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             ThirdPersonController tpc = hit.collider.GetComponent<ThirdPersonController>();
-            Abilities ab = hit.collider.gameObject.GetComponent<Abilities>();
-            if (ab != null) ab.KnockBack(hit);
+            Abilities ab = hit.collider.GetComponent<Abilities>();
+            if (ab != null) ab.KnockBack(transform); 
             
             if (ab.equippedMask == MaskTypeEquipped.Stone)
             {
@@ -97,16 +97,16 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    private void KnockBack(RaycastHit hit)
+    public void KnockBack(Transform attacker)
     {
-        var player = hit.collider.GetComponent<StarterAssets.ThirdPersonController>();
+        var player = GetComponent<StarterAssets.ThirdPersonController>();
         if (player != null)
         {
-            Vector3 knockbackDir = (transform.position).normalized;
-            knockbackDir += Vector3.up * forceStrengthY;
-            player.AddImpact(knockbackDir, forceStrengthZ);
-            
-            // TODO: DISABLE FOR 
+            Vector3 pushDir = transform.position - attacker.position;
+            pushDir.y = 0; 
+            pushDir.Normalize();
+            player.AddImpact(pushDir, forceStrengthZ);
+            player.AddImpact(Vector3.up, forceStrengthY);
         }
     }
     public void TakeDamage()
