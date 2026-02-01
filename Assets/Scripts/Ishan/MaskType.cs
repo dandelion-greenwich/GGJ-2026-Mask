@@ -49,6 +49,10 @@ public class MaskTypeScript : MonoBehaviour
 
         Rigidbody rb = col.GetComponent<Rigidbody>();
         rb.mass = 10f;
+        // add knockback multiplier
+
+        Abilities a = col.GetComponent<Abilities>();
+        a.equippedMask = Abilities.MaskTypeEquipped.Stone;
     }
 
     private void EquipWing(Collider col)
@@ -59,6 +63,9 @@ public class MaskTypeScript : MonoBehaviour
 
         Rigidbody rb = col.GetComponent<Rigidbody>();
         rb.mass = 0.5f;
+
+        Abilities a = col.GetComponent<Abilities>();
+        a.equippedMask = Abilities.MaskTypeEquipped.Wing;
     }
 
     private void EquipSaitama(Collider col)
@@ -69,5 +76,8 @@ public class MaskTypeScript : MonoBehaviour
 
         Rigidbody rb = col.GetComponent<Rigidbody>();
         rb.mass = 2f;
+
+        Abilities a = col.GetComponent<Abilities>();
+        a.equippedMask = Abilities.MaskTypeEquipped.Saitama;
     }
 }
