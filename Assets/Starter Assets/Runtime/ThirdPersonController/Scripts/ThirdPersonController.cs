@@ -86,6 +86,9 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private Vector3 _impact = Vector3.zero;
+        [Tooltip("How quickly the push force fades out")]
+        public float ImpactDrag = 5.0f;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -267,7 +270,15 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-            // move the player
+            // Apply impact decay (drag)
+            if (_impact.magnitude > 0.2f) 
+            {
+                _controller.Move(_impact * Time.deltaTime);
+            }
+            // Linearly interpolate impact towards zero to simulate drag
+            _impact = Vector3.Lerp(_impact, Vector3.zero, ImpactDrag * Time.deltaTime);
+
+            // move the player (existing logic + gravity)
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
@@ -353,6 +364,27 @@ namespace StarterAssets
             if (lfAngle < -360f) lfAngle += 360f;
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
+        
+        public void AddImpact(Vector3 dir, float force)
+        {
+            dir.Normalize();
+    
+            // 1. Apply the vertical force to Unity's gravity system
+            // We strictly use the Y component for lift
+            if (dir.y > 0) 
+            {
+                // Apply instant upward velocity. 
+                // We multiply by force, but you might need to tweak the multiplier to feel right.
+                _verticalVelocity = dir.y * force; 
+            }
+
+            // 2. Apply horizontal force to our friction system
+            // Flatten the vector so we only push horizontally
+            Vector3 horizontalDir = new Vector3(dir.x, 0, dir.z).normalized;
+    
+            // Add to impact
+            _impact += horizontalDir * force;
         }
 
         private void OnDrawGizmosSelected()

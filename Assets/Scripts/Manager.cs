@@ -1,15 +1,24 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Serialization;
 
 public class Manager : MonoBehaviour
 {
     [Header("Player related")] 
-    public Transform playerSpawn1;
-    public Transform playerSpawn2;
-    public GameObject playerPrefab1;
-    public GameObject playerPrefab2;
+    [SerializeField] Transform playerSpawn1;
+    [SerializeField] Transform playerSpawn2;
+    [SerializeField] GameObject playerPrefab1;
+    [SerializeField] GameObject playerPrefab2;
+    
+    [Header("Mask related")]
+    [SerializeField] GameObject maskPrefab;
+    [SerializeField] Transform maskSpawn;
+    [SerializeField] int maskSpawnRange;
+    [SerializeField] float maskTimer;
+    [SerializeField] float timeToBreakMask;
     
     [Header("UI")]
     public TextMeshProUGUI gameStateText;
@@ -17,6 +26,7 @@ public class Manager : MonoBehaviour
     public enum GameState{Start, Playing, GameOver};
     GameState gameState;
     Abilities player1, player2;
+    GameObject currentMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     public static Manager Instance { get; private set; }
@@ -62,5 +72,31 @@ public class Manager : MonoBehaviour
                 gameStateText.text = "Game Over";
                 break;
         }
+    }
+
+    private void SpawnMask()
+    {
+        int randX = UnityEngine.Random.Range(-maskSpawnRange, maskSpawnRange);
+        int randZ = UnityEngine.Random.Range(-maskSpawnRange, maskSpawnRange);
+        Vector3 maskTransform = new Vector3(
+            maskSpawn.position.x + randX, 
+            maskSpawn.position.y, 
+            maskSpawn.position.z + randZ);
+        
+        currentMask = Instantiate(maskPrefab, maskSpawn.position, maskSpawn.rotation);
+        StartCoroutine(LiveDurationCoroutine(timeToBreakMask));
+    }
+    
+    public IEnumerator SpawnMaskCoroutine(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        
+        SpawnMask();
+    }
+    public IEnumerator LiveDurationCoroutine(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        
+        StartCoroutine(SpawnMaskCoroutine(waitTime));
     }
 }

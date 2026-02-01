@@ -10,6 +10,8 @@ public class Abilities : MonoBehaviour
     [Header("Lives")] 
     public int lives;
     public int maxLives;
+    public int forceStrengthZ;
+    public int forceStrengthY;
     
     
     void Start()
@@ -32,11 +34,23 @@ public class Abilities : MonoBehaviour
             return;
             
             Abilities ab = hit.collider.gameObject.GetComponent<Abilities>();
-            if (ab != null) ab.TakeDamage();
+            if (ab != null) ab.KnockBack(hit);
         }
     }
 
-    private void TakeDamage()
+    private void KnockBack(RaycastHit hit)
+    {
+        var player = hit.collider.GetComponent<StarterAssets.ThirdPersonController>();
+        if (player != null)
+        {
+            Vector3 knockbackDir = (transform.position).normalized;
+            knockbackDir += Vector3.up * forceStrengthY;
+            player.AddImpact(knockbackDir, forceStrengthZ);
+            
+            // TODO: DISABLE FOR 
+        }
+    }
+    public void TakeDamage()
     {
         lives--;
 
@@ -46,10 +60,12 @@ public class Abilities : MonoBehaviour
         }
     }
     
+    
+    
     // Debug for attack function
     void OnDrawGizmos()
     {
-#if false
+#if true
         RaycastHit hit;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         Vector3 direction = transform.forward;
