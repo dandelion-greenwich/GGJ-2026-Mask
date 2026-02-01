@@ -1,4 +1,5 @@
 using UnityEngine;
+using StarterAssets;
 
 public class Abilities : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Abilities : MonoBehaviour
     public int maxLives;
     public int forceStrengthZ;
     public int forceStrengthY;
+
+    public enum MaskTypeEquipped {Stone, Wing, Saitama}
+    public MaskTypeEquipped equippedMask;
     
     
     void Start()
@@ -33,8 +37,63 @@ public class Abilities : MonoBehaviour
                 && !hit.collider.CompareTag("Player 2"))
             return;
             
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            ThirdPersonController tpc = hit.collider.GetComponent<ThirdPersonController>();
             Abilities ab = hit.collider.gameObject.GetComponent<Abilities>();
             if (ab != null) ab.KnockBack(hit);
+            
+            if (ab.equippedMask == MaskTypeEquipped.Stone)
+            {
+                Debug.Log("Hit Opponent Has Stone Mask");
+
+                // Remove Enemy Buffs
+                tpc.MoveSpeed = 2.0f;
+                tpc.JumpHeight = 1.0f;
+                rb.mass = 1.0f;
+                // add knockback reset
+
+                // Add Buffs to yourself
+                Debug.Log("Stolen Stone Mask");
+                equippedMask = MaskTypeEquipped.Stone;
+                ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
+                Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
+                myTpc.MoveSpeed = 1.0f;
+                myTpc.JumpHeight = 0.6f;
+                myRb.mass = 10f;
+
+            }
+            else if (ab.equippedMask == MaskTypeEquipped.Wing)
+            {
+                Debug.Log("Hit Opponent Has Stone Mask");
+
+                tpc.MoveSpeed = 2.0f;
+                tpc.JumpHeight = 1.0f;
+                rb.mass = 1.0f;
+
+                Debug.Log("Stolen Wing Mask");
+                equippedMask = MaskTypeEquipped.Wing;
+                ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
+                Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
+                myTpc.MoveSpeed = 4.0f;
+                myTpc.JumpHeight = 3.2f;
+                myRb.mass = 0.5f;
+            }
+            else if (ab.equippedMask == MaskTypeEquipped.Saitama)
+            {
+                Debug.Log("Hit Opponent Has Saitama Mask");
+
+                tpc.MoveSpeed = 2.0f;
+                tpc.JumpHeight = 1.0f;
+                rb.mass = 1.0f;
+
+                Debug.Log("Stolen Saitama Mask");
+                equippedMask = MaskTypeEquipped.Saitama;
+                ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
+                Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
+                myTpc.MoveSpeed = 2.0f;
+                myTpc.JumpHeight = 2.0f;
+                myRb.mass = 2.0f;
+            }
         }
     }
 
