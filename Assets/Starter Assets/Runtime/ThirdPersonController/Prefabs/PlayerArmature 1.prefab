@@ -1122,6 +1122,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  ImpactDrag: 5
 --- !u!114 &5885216827943657505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,7 +1174,10 @@ MonoBehaviour:
   radius: 0.5
   maxDistance: 1
   lives: 0
-  maxLives: 0
+  maxLives: 5
+  forceStrengthZ: 20
+  forceStrengthY: 0.2
+  equippedMask: 0
 --- !u!114 &4416926081852918493
 MonoBehaviour:
   m_ObjectHideFlags: 0

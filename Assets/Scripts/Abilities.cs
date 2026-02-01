@@ -11,8 +11,8 @@ public class Abilities : MonoBehaviour
     [Header("Lives")] 
     public int lives;
     public int maxLives;
-    public int forceStrengthZ;
-    public int forceStrengthY;
+    public float forceStrengthZ;
+    public float forceStrengthY;
 
     public enum MaskTypeEquipped {Stone, Wing, Saitama}
     public MaskTypeEquipped equippedMask;
