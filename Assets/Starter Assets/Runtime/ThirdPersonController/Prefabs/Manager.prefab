@@ -93,9 +93,9 @@ MonoBehaviour:
   playerSpawn2: {fileID: 0}
   playerPrefab1: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
   playerPrefab2: {fileID: 4416926081852918481, guid: 022741ab4d6823f449a03475ed59e76b, type: 3}
-  maskPrefab: {fileID: 0}
+  maskPrefab: {fileID: 1343573679566413447, guid: 8d97b49403448d7409896f4608219962, type: 3}
   maskSpawn: {fileID: 0}
   maskSpawnRange: 3
   maskTimer: 0
-  timeToBreakMask: 0
+  timeToBreakMask: 30
   gameStateText: {fileID: 0}

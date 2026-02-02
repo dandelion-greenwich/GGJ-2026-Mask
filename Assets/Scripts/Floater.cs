@@ -16,10 +16,9 @@ public class Floater : MonoBehaviour {
     // Position Storage Variables
     Vector3 posOffset = new Vector3 ();
     Vector3 tempPos = new Vector3 ();
- 
-    // Use this for initialization
-    void Start () {
-        // Store the starting position & rotation of the object
+    
+    public void ResetOffset()
+    {
         posOffset = transform.position;
     }
      

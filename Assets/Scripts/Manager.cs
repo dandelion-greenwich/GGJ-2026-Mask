@@ -52,6 +52,11 @@ public class Manager : MonoBehaviour
         UpdateUI();
     }
 
+    private void Start()
+    {
+        StartCoroutine(SpawnMaskCoroutine(5f));
+    }
+
     public void EndGame()
     {
         gameState = GameState.GameOver;
@@ -76,6 +81,7 @@ public class Manager : MonoBehaviour
 
     private void SpawnMask()
     {
+        Debug.Log("Spawn Mask");
         int randX = UnityEngine.Random.Range(-maskSpawnRange, maskSpawnRange);
         int randZ = UnityEngine.Random.Range(-maskSpawnRange, maskSpawnRange);
         Vector3 maskTransform = new Vector3(
@@ -92,23 +98,23 @@ public class Manager : MonoBehaviour
         if (player.CompareTag("Player 1"))
         {
             Debug.Log("Respawning player 1");
-            CharacterController CC = player.GetComponent<CharacterController>();
-            if (CC != null)
+            CharacterController cc = player.GetComponent<CharacterController>();
+            if (cc != null)
             {
-                CC.enabled = false;
+                cc.enabled = false;
                 player1.transform.position = playerSpawn1.position;
-                CC.enabled = true;
+                cc.enabled = true;
             }
         }
         else
         {
             Debug.Log("Respawning player 2");
-            CharacterController CC = player.GetComponent<CharacterController>();
-            if (CC != null)
+            CharacterController cc = player.GetComponent<CharacterController>();
+            if (cc != null)
             {
-                CC.enabled = false;
+                cc.enabled = false;
                 player2.transform.position = playerSpawn2.position;
-                CC.enabled = true;
+                cc.enabled = true;
             }
         }
     }
@@ -121,9 +127,9 @@ public class Manager : MonoBehaviour
     }
     public IEnumerator LiveDurationCoroutine(float waitTime)
     {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(waitTime);
         if (currentMask != null) Destroy(currentMask);
         
-        StartCoroutine(SpawnMaskCoroutine(waitTime));
+        StartCoroutine(SpawnMaskCoroutine(5f));
     }
 }

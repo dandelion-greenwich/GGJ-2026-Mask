@@ -20,6 +20,16 @@ public class MaskTypeScript : MonoBehaviour
         {
             EquipMask(collider);
         }
+        
+        if (collider.CompareTag("Ground"))
+        {
+            Floater floater = GetComponent<Floater>();
+            if (floater != null)
+            {
+                floater.enabled = true;
+                floater.ResetOffset();
+            }
+        }
     }
 
     private void Start()
@@ -37,6 +47,9 @@ public class MaskTypeScript : MonoBehaviour
                 type = MaskType.Saitama;
                 break;
         }
+        
+        Floater floater = GetComponent<Floater>();
+        if (floater != null) floater.enabled = false;
     }
 
     private void EquipMask(Collider col)

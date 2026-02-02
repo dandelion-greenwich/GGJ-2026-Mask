@@ -14,7 +14,7 @@ public class Abilities : MonoBehaviour
     public float forceStrengthZ;
     public float forceStrengthY;
 
-    public enum MaskTypeEquipped {Stone, Wing, Saitama}
+    public enum MaskTypeEquipped {None, Stone, Wing, Saitama}
     public MaskTypeEquipped equippedMask;
     
     
@@ -114,10 +114,7 @@ public class Abilities : MonoBehaviour
         lives--;
         Manager.Instance.Respawn(gameObject);
         
-        if (lives <= 0)
-        {
-        Manager.Instance.EndGame();
-        }
+        if (lives <= 0) Manager.Instance.EndGame();
     }
     
     // Debug for attack function
