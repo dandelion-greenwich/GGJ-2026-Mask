@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Player 1
   - Player 2
+  - Ground
   layers:
   - Default
   - TransparentFX
