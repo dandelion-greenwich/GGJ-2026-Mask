@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using StarterAssets;
 
@@ -14,6 +15,13 @@ public class Abilities : MonoBehaviour
     public float forceStrengthZ;
     public float forceStrengthY;
 
+    [Header("Meshes")]
+    [SerializeField] private GameObject mainMesh;
+    [SerializeField] private GameObject wingMesh;
+    [SerializeField] private GameObject saitamaMesh;
+    [SerializeField] private GameObject stoneMesh;
+    
+
     public enum MaskTypeEquipped {None, Stone, Wing, Saitama}
     public MaskTypeEquipped equippedMask;
     
@@ -21,6 +29,9 @@ public class Abilities : MonoBehaviour
     void Start()
     {
         lives = maxLives;
+        SwitchMesh("");
+
+        Manager.Instance.OnResetMask += ResetValues;
     }
 
     public void Attack()
@@ -45,54 +56,50 @@ public class Abilities : MonoBehaviour
             if (ab.equippedMask == MaskTypeEquipped.Stone)
             {
                 Debug.Log("Hit Opponent Has Stone Mask");
-
-                // Remove Enemy Buffs
-                tpc.MoveSpeed = 2.0f;
-                tpc.JumpHeight = 1.0f;
-                rb.mass = 1.0f;
-                // add knockback reset
+                ab.ResetValues();
 
                 // Add Buffs to yourself
                 Debug.Log("Stolen Stone Mask");
                 equippedMask = MaskTypeEquipped.Stone;
+                
                 ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
                 Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
                 myTpc.MoveSpeed = 1.0f;
                 myTpc.JumpHeight = 0.6f;
                 myRb.mass = 10f;
+                SwitchMesh("Stone");
 
             }
             else if (ab.equippedMask == MaskTypeEquipped.Wing)
             {
                 Debug.Log("Hit Opponent Has Stone Mask");
-
-                tpc.MoveSpeed = 2.0f;
-                tpc.JumpHeight = 1.0f;
-                rb.mass = 1.0f;
+                ab.ResetValues();
 
                 Debug.Log("Stolen Wing Mask");
                 equippedMask = MaskTypeEquipped.Wing;
+                
                 ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
                 Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
                 myTpc.MoveSpeed = 4.0f;
                 myTpc.JumpHeight = 3.2f;
                 myRb.mass = 0.5f;
+                SwitchMesh("Wing");
+
             }
             else if (ab.equippedMask == MaskTypeEquipped.Saitama)
             {
                 Debug.Log("Hit Opponent Has Saitama Mask");
-
-                tpc.MoveSpeed = 2.0f;
-                tpc.JumpHeight = 1.0f;
-                rb.mass = 1.0f;
+                ab.ResetValues();
 
                 Debug.Log("Stolen Saitama Mask");
                 equippedMask = MaskTypeEquipped.Saitama;
+                
                 ThirdPersonController myTpc = gameObject.GetComponent<ThirdPersonController>();
                 Rigidbody myRb = gameObject.GetComponent<Rigidbody>();
                 myTpc.MoveSpeed = 2.0f;
                 myTpc.JumpHeight = 2.0f;
                 myRb.mass = 2.0f;
+                SwitchMesh("Saitama");
             }
         }
     }
@@ -115,6 +122,52 @@ public class Abilities : MonoBehaviour
         Manager.Instance.Respawn(gameObject);
         
         if (lives <= 0) Manager.Instance.EndGame();
+    }
+
+    void ResetValues()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        ThirdPersonController tpc = GetComponent<ThirdPersonController>();
+
+        if (rb != null && tpc != null)
+        {
+            tpc.MoveSpeed = 2.0f;
+            tpc.JumpHeight = 1.0f;
+            rb.mass = 1.0f;
+        }
+        
+        SwitchMesh("");
+    }
+
+    public void SwitchMesh(String meshName)
+    {
+        switch (meshName)
+        {
+            case "Wing":
+                mainMesh.SetActive(false);
+                wingMesh.SetActive(true);
+                saitamaMesh.SetActive(false);
+                stoneMesh.SetActive(false);
+                break;
+            case "Saitama":
+                mainMesh.SetActive(false);
+                wingMesh.SetActive(false);
+                saitamaMesh.SetActive(true);
+                stoneMesh.SetActive(false);
+                break;
+            case "Stone":
+                mainMesh.SetActive(true);
+                wingMesh.SetActive(false);
+                saitamaMesh.SetActive(false);
+                stoneMesh.SetActive(true);
+                break;
+            default:
+                mainMesh.SetActive(true);
+                wingMesh.SetActive(false);
+                saitamaMesh.SetActive(false);
+                stoneMesh.SetActive(false);
+                break;
+        }
     }
     
     // Debug for attack function

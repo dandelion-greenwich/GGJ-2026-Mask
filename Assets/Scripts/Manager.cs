@@ -27,6 +27,7 @@ public class Manager : MonoBehaviour
     GameState gameState;
     GameObject player1, player2;
     GameObject currentMask;
+    public event Action OnResetMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     public static Manager Instance { get; private set; }
@@ -129,6 +130,7 @@ public class Manager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         if (currentMask != null) Destroy(currentMask);
+        OnResetMask.Invoke();
         
         StartCoroutine(SpawnMaskCoroutine(5f));
     }

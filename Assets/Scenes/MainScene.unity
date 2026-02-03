@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: gameStateText
       value: 
       objectReference: {fileID: 1156423605}
+    - target: {fileID: 4178673943267219055, guid: 0d7162e976eeb8647b82951f0e186e27, type: 3}
+      propertyPath: timeToBreakMask
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1494,7 +1498,7 @@ Transform:
   m_GameObject: {fileID: 1823568251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.125969, y: 40.35376, z: 19.98006}
+  m_LocalPosition: {x: 21.125969, y: 40.4698, z: 19.98006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
