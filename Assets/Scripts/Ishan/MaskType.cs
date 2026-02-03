@@ -13,7 +13,10 @@ public enum MaskType
 public class MaskTypeScript : MonoBehaviour
 {
     public MaskType type;
-
+    public GameObject WingMaskMesh;
+    public GameObject SaitamaMaskMesh;
+    public GameObject StoneMaskMesh;
+    
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player 1") || collider.CompareTag("Player 2"))
@@ -35,17 +38,19 @@ public class MaskTypeScript : MonoBehaviour
     private void Start()
     {
         int rand = UnityEngine.Random.Range(0, 3);
-        Debug.Log("Random stone numb: " + rand);
         switch (rand)
         {
             case 0:
                 type = MaskType.Stone;
+                StoneMaskMesh.SetActive(true);
                 break;
             case 1:
                 type = MaskType.Wing;
+                WingMaskMesh.SetActive(true);
                 break;
             case 2:
                 type = MaskType.Saitama;
+                SaitamaMaskMesh.SetActive(true);
                 break;
         }
         
