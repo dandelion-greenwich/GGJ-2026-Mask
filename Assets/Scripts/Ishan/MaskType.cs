@@ -13,7 +13,10 @@ public enum MaskType
 public class MaskTypeScript : MonoBehaviour
 {
     public MaskType type;
-
+    public GameObject WingMaskMesh;
+    public GameObject SaitamaMaskMesh;
+    public GameObject StoneMaskMesh;
+    
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player 1") || collider.CompareTag("Player 2"))
@@ -34,17 +37,20 @@ public class MaskTypeScript : MonoBehaviour
 
     private void Start()
     {
-        int rand = UnityEngine.Random.Range(0, 2);
+        int rand = UnityEngine.Random.Range(0, 3);
         switch (rand)
         {
-            case 1:
+            case 0:
                 type = MaskType.Stone;
+                StoneMaskMesh.SetActive(true);
+                break;
+            case 1:
+                type = MaskType.Wing;
+                WingMaskMesh.SetActive(true);
                 break;
             case 2:
-                type = MaskType.Wing;
-                break;
-            case 3:
                 type = MaskType.Saitama;
+                SaitamaMaskMesh.SetActive(true);
                 break;
         }
         
@@ -85,6 +91,7 @@ public class MaskTypeScript : MonoBehaviour
 
         Abilities a = col.GetComponent<Abilities>();
         a.equippedMask = Abilities.MaskTypeEquipped.Stone;
+        a.SwitchMesh("Stone");
     }
 
     private void EquipWing(Collider col)
@@ -98,6 +105,7 @@ public class MaskTypeScript : MonoBehaviour
 
         Abilities a = col.GetComponent<Abilities>();
         a.equippedMask = Abilities.MaskTypeEquipped.Wing;
+        a.SwitchMesh("Wing");
     }
 
     private void EquipSaitama(Collider col)
@@ -111,5 +119,6 @@ public class MaskTypeScript : MonoBehaviour
 
         Abilities a = col.GetComponent<Abilities>();
         a.equippedMask = Abilities.MaskTypeEquipped.Saitama;
+        a.SwitchMesh("Saitama");
     }
 }
